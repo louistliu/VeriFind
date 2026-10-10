@@ -1,0 +1,24 @@
+{
+  "name": "thehaguepolicy_2b2y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louistliu/theHaguePolicy_2b2y.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/louistliu/theHaguePolicy_2b2y/issues"
+  },
+  "homepage": "https://github.com/louistliu/theHaguePolicy_2b2y#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

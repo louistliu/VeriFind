@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeldVerkenner • Overheidsbeleid & Politiek Nieuws</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta+Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-sky-50 via-indigo-50/50 to-amber-50/30 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white/85 backdrop-blur-md border-b border-indigo-100 sticky top-0 z-30 shadow-xs">
+        <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-indigo-500 to-sky-400 p-2.5 rounded-2xl text-white font-bold flex items-center justify-center w-11 h-11 shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-landmark text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-base text-slate-900 tracking-tight">VeldVerkenner • Overheidsscenario</h1>
+                    <p class="text-xs text-emerald-600 font-semibold flex items-center space-x-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span id="header-scenario-title">Scenario: Politiek Nieuws & Beleidsontwikkeling (~15 min)</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <span id="progress-indicator" class="hidden bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-xl text-xs font-bold border border-indigo-100">
+                    Stap 1
+                </span>
+                <button onclick="returnToMenu()" class="bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 px-3.5 py-2 rounded-xl text-xs font-semibold transition shadow-xs flex items-center space-x-1.5 cursor-pointer">
+                    <i class="fa-solid fa-house text-indigo-500"></i>
+                    <span>Menu</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col gap-4">
+
+        <!-- SETUP MENU SCREEN -->
+        <div id="setup-screen" class="bg-white/90 backdrop-blur-md border border-indigo-100/80 rounded-3xl p-6 md:p-8 shadow-xl space-y-6 my-auto">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto text-2xl shadow-inner border border-indigo-200">
+                    <i class="fa-solid id-card-clip fa-building-columns"></i>
+                </div>
+                <h2 class="font-extrabold text-2xl text-slate-900">Selecteer Trainingsmodule</h2>
+                <p class="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
+                    Kies het scenario voor overheidsmedewerkers over politiek nieuws, waarbij een aanvankelijk verdacht lijkend initiatief na grondig onderzoek en verificatie wél betrouwbaar blijkt te zijn.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                <div class="space-y-3">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600">1. Kies Module</label>
+                    <div class="space-y-2">
+                        <label class="flex items-start space-x-3 p-3.5 rounded-2xl border border-indigo-100 bg-slate-50 hover:bg-indigo-50/40 transition cursor-pointer">
+                            <input type="radio" name="scenario" value="civilian" checked class="mt-1 accent-indigo-600">
+                            <div class="text-xs">
+                                <strong class="text-slate-900 block font-bold mb-0.5">Samenleving & Gezondheid</strong>
+                                <span class="text-slate-500">Regionaal scenario rondom een virusuitbraak en wijkgeruchten.</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start space-x-3 p-3.5 rounded-2xl border border-indigo-100 bg-slate-50 hover:bg-indigo-50/40 transition cursor-pointer">
+                            <input type="radio" name="scenario" value="government" class="mt-1 accent-indigo-600">
+                            <div class="text-xs">
+                                <strong class="text-slate-900 block font-bold mb-0.5">Beleid & Politiek Nieuws (Overheid)</strong>
+                                <span class="text-slate-500">Ontwikkeling over een nieuw gemeentelijk initiatief. Van gezonde aanvankelijke scepsis tot gefundeerd vertrouwen na verificatie.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-indigo-600">2. Doelgroep</label>
+                    <div class="space-y-2">
+                        <div class="p-3.5 rounded-2xl border border-indigo-100 bg-slate-50 text-xs">
+                            <strong class="text-slate-900 block font-bold mb-0.5">Ambtenaren & Beleidsmakers</strong>
+                            <span class="text-slate-500">Oefen in het onderscheiden van vroege onterechte alarmberichten én het herkennen van valide, verifieerbare beleidsontwikkelingen.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="startSimulation()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-3.5 px-6 rounded-2xl text-sm transition shadow-lg shadow-indigo-600/30 cursor-pointer">
+                    Start Module
+                </button>
+            </div>
+        </div>
+
+        <!-- SIMULATION INTERFACE -->
+        <div id="sim-container" class="hidden flex-1 flex flex-col gap-4">
+            <div class="bg-white/90 backdrop-blur-sm border border-indigo-100/80 rounded-2xl p-4 text-xs text-slate-600 flex flex-col sm:flex-row items-start sm:items-center justify-between shadow-sm gap-2">
+                <div class="flex items-center space-x-2.5">
+                    <div class="bg-indigo-100 text-indigo-600 p-2 rounded-xl">
+                        <i class="fa-solid fa-landmark text-sm"></i>
+                    </div>
+                    <div>
+                        <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block">Fase in scenario</span>
+                        <strong id="timeline-progress-label" class="text-slate-900 text-sm">Initialisatie...</strong>
+                    </div>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-100 text-indigo-700 px-3 py-1.5 rounded-xl text-[11px] font-medium flex items-center space-x-1.5">
+                    <i class="fa-solid fa-shield text-indigo-500"><span>Beleidsanaal actief</span></i>
+                </div>
+            </div>
+
+            <!-- Chat Stream Box -->
+            <div id="chat-stream" class="flex-1 bg-white/70 backdrop-blur-md border border-indigo-100/80 rounded-3xl p-4 md:p-6 space-y-4 overflow-y-auto min-h-[500px] max-h-[600px] shadow-sm">
+                <!-- Messages injected dynamically -->
+            </div>
+
+            <!-- Dynamic Question / Prompt Container -->
+            <div id="interactive-prompt-area" class="hidden transition-all duration-300">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal: Profile Inspector -->
+    <div id="profile-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-indigo-100 rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-in zoom-in-95 duration-200">
+            <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center transition cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="profile-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal: Source Inspector -->
+    <div id="source-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-indigo-100 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative animate-in zoom-in-95 duration-200">
+            <button onclick="closeSourceModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center transition cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="source-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal: Gentle Feedback / Hint Modal -->
+    <div id="hint-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border border-amber-200 rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-in zoom-in-95 duration-200 text-center space-y-4">
+            <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-sm">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <div>
+                <h3 class="font-extrabold text-base text-slate-900 mb-1">Onderzoekstip</h3>
+                <p id="hint-modal-text" class="text-xs md:text-sm text-slate-600 leading-relaxed"></p>
+            </div>
+            <button onclick="closeHintModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-3 rounded-2xl text-xs transition shadow-md cursor-pointer">
+                Begrepen, ga verder met de chat
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const civilianStoryline = [
+            {
+                type: "message",
+                time: "08:30",
+                progressLabel: "1. Ochtendgeruchten in de wijk",
+                author: {
+                    name: "Lucas",
+                    handle: "@Lucas_WijkApp",
+                    avatarIcon: "fa-apple-whole",
+                    avatarBg: "bg-rose-500",
+                    bio: "Actief op lokale buurtgroepen.",
+                    joined: "3 weken geleden",
+                    followers: "142",
+                    interests: "Woningmarkt, Lokale sport",
+                    following: "@KookFanatiek, @WijkAgent_01"
+                },
+                text: "Hé allemaal! Ik hoorde net via via dat het ziekenhuis volstroomt..."
+            },
+            {
+                type: "prompt",
+                promptId: "q1",
+                progressLabel: "Reflectie 1",
+                question: "Hoe waarschijnlijk is het op dit moment dat de overheid censuur toepast?",
+                context: "Beoordeel de herkomst.",
+                optimalRange: "Laag (0% - 30%)",
+                explanation: "Anoniem gerucht zonder harde bron."
+            }
+        ];
+
+        // GLOEDNIEUW OVERHEIDSSCENARIO: Van Scepsis naar Terecht Vertrouwen
+        const governmentStoryline = [
+            {
+                type: "message",
+                time: "09:00",
+                progressLabel: "Fase 1: Vroege online geruchten over nieuw beleidsplan",
+                author: {
+                    name: "Pim Burger",
+                    handle: "@PimKritischNL",
+                    avatarIcon: "fa-seedling",
+                    avatarBg: "bg-amber-500",
+                    bio: "Burgeractivist en blogger over lokale bestuurlijke besluiten.",
+                    joined: "5 dagen geleden",
+                    followers: "48",
+                    interests: "Transparantie, Lokale politiek",
+                    following: "@RamenKijkers, @AltNieuws"
+                },
+                text: "BREAKING: Het ministerie en de gemeente berokkenen stiekem een plan om alle subsidies voor lokale burgerinitiatieven per direct te halveren! Dit wordt angstvallig stilgehouden. Lees de concept-nota: <a href='#' onclick='openSourceModal(201); return false;' class='text-indigo-600 underline font-bold'>Concept_Subsidie_Roof.txt (...)</a>"
+            },
+            {
+                type: "message",
+                time: "09:12",
+                progressLabel: "Fase 1: Vroege online geruchten over nieuw beleidsplan",
+                author: {
+                    name: "Sanne",
+                    handle: "@Sanne_Burgers",
+                    avatarIcon: "fa-lemon",
+                    avatarBg: "bg-emerald-500",
+                    bio: "Buurtbewoner en vrijwilliger bij wijkcentrum.",
+                    joined: "1 jaar geleden",
+                    followers: "320",
+                    interests: "Wijkwerk, Cultuur",
+                    following: "@GemeenteNieuws"
+                },
+                text: "Menen ze dit echt? Als onze subsidie wegvalt kunnen we het wijkcentrum wel sluiten! Waarom communiceert de gemeente hier niet open over?"
+            },
+            {
+                type: "prompt",
+                promptId: "gov_q1",
+                progressLabel: "Reflectie 1: De eerste alarmerende berichten",
+                question: "Er circuleert op social media een alarmerend bericht over een abrupte subsidiestop. Hoe waarschijnlijk acht jij het op dit moment dat dit beleidsplan authentiek en betrouwbaar is?",
+                context: "Onderzoek het account @PimKritischNL en open de gelinkte bron in de broninspectie.",
+                optimalRange: "Laag / Sceptisch (0% - 25%)",
+                explanation: "In deze beginfase is het volkomen terecht om zeer sceptisch te zijn: het account is pas 5 dagen oud en de bron is een anoniem tekstbestand met ontbrekende metadata."
+            },
+            {
+                type: "message",
+                time: "11:30",
+                progressLabel: "Fase 2: Interne verificatie & Collegiaal overleg",
+                author: {
+                    name: "Els de Wit",
+                    handle: "@ElsDeWit_Beleid",
+                    avatarIcon: "fa-landmark",
+                    avatarBg: "bg-indigo-600",
+                    bio: "Senior beleidsmedewerker bij Bestuurszaken.",
+                    joined: "4 jaar geleden",
+                    followers: "1.4K",
+                    interests: "Openbaar bestuur, Financiën",
+                    following: "@VNG, @Rijksoverheid"
+                },
+                text: "@PimKritischNL Dat document klopt van geen kant. Er is geen enkele sprake van een halvering. Wel wordt er gekeken naar een vereenvoudiging van de aanvraagstructuur per 2027."
+            },
+            {
+                type: "message",
+                time: "11:45",
+                progressLabel: "Fase 2: Interne verificatie & Collegiaal overleg",
+                author: {
+                    name: "Frank Mulder",
+                    handle: "@FMulder_Press",
+                    avatarIcon: "fa-newspaper",
+                    avatarBg: "bg-blue-600",
+                    bio: "Parlementair verslaggever voor openbaar bestuur.",
+                    joined: "6 jaar geleden",
+                    followers: "8.9K",
+                    interests: "Journalistiek, Politiek",
+                    following: "@ANP, @PolitiekNL"
+                },
+                text: "Ter aanvulling: ik heb zojuist het officiële persbericht ontvangen van het departement. Het volledige beleidsvoorstel met alle achtergronddata is zonet gepubliceerd via de officiële kanalen. Link: <a href='#' onclick='openSourceModal(202); return false;' class='text-indigo-600 underline font-bold'>Rijksoverheid_Beleidsvisie_2027.pdf</a>"
+            },
+            {
+                type: "prompt",
+                promptId: "gov_q2",
+                progressLabel: "Reflectie 2: Eerste verificatie door vakgenoten",
+                question: "Beleidsmedewerkers en journalisten reageren en wijzen op een officieel persbericht met volledige achtergronddata. Hoe waarschijnlijk vind je het nu dat het voorgestelde beleidsinitiëring serieus en legitiem is?",
+                context: "Bekijk de achtergrond van @ElsDeWit_Beleid en inspecteer de officiële publicatie in de broninspectie.",
+                optimalRange: "Gematigd tot Hoog (60% - 80%)",
+                explanation: "Na verificatie via gevestigde ambtelijke kanalen en een officiële publicatie met transparante data blijkt dat het om regulier, constructief beleid gaat in plaats van een 'stiekeme roof'."
+            },
+            {
+                type: "message",
+                time: "15:10",
+                progressLabel: "Fase 3: Diepgaande analyse & Transparantie",
+                author: {
+                    name: "Els de Wit",
+                    handle: "@ElsDeWit_Beleid",
+                    avatarIcon: "fa-landmark",
+                    avatarBg: "bg-indigo-600",
+                    bio: "Senior beleidsmedewerker bij Bestuurszaken.",
+                    joined: "4 jaar geleden",
+                    followers: "1.4K",
+                    interests: "Openbaar bestuur, Financiën",
+                    following: "@VNG, @Rijksoverheid"
+                },
+                text: "Om alle onduidelijkheid weg te nemen: we hebben alle cijfers, inspraakrondes en de volledige beleidsmatrix openbaar gemaakt. Er is geen subsidievermindering; sterker nog, het budget wordt geïndexeerd. Bekijk het definitieve transparantiedossier: <a href='#' onclick='openSourceModal(203); return false;' class='text-indigo-600 underline font-bold'>Transparantiedossier_Subsidies_2027.pdf</a>"
+            },
+            {
+                type: "message",
+                time: "15:25",
+                progressLabel: "Fase 3: Diepgaande analyse & Transparantie",
+                author: {
+                    name: "Sanne",
+                    handle: "@Sanne_Burgers",
+                    avatarIcon: "fa-lemon",
+                    avatarBg: "bg-emerald-500",
+                    bio: "Buurtbewoner en vrijwilliger bij wijkcentrum.",
+                    joined: "1 jaar geleden",
+                    followers: "320",
+                    interests: "Wijkwerk, Cultuur",
+                    following: "@GemeenteNieuws"
+                },
+                text: "Dank voor de heldere toelichting en het openbare dossier! Fijn om te zien dat de feiten gewoon kloppen en dat we als wijkcentrum op de steun kunnen blijven rekenen."
+            },
+            {
+                type: "prompt",
+                promptId: "gov_q3",
+                progressLabel: "Reflectie 3: Definitief vertrouwen na volledige openbaarheid",
+                question: "Het ministerie heeft het volledige transparantiedossier met alle cijfers en inspraakrondes gepubliceerd, en betrokken burgers bevestigen de juistheid. Hoe waarschijnlijk is het dat je dit beleidsinitiatief nu volledig kunt vertrouwen?",
+                context: "Beoordeel de openbaarheid van data, de verificatie door onafhankelijke journalisten en de reacties uit de praktijk.",
+                optimalRange: "Zeer hoog (85% - 100%)",
+                explanation: "Waar je aan het begin terecht sceptisch was over een anoniem gerucht, is het beleid nu volledig doorgrond, onderbouwd met open data en geverifieerd door betrouwbare instanties. Volledig vertrouwen is hier op zijn plaats."
+            }
+        ];
+
+        const sourcesData = {
+            1: {
+                title: "Notitie_Interne_Memo_2026.txt",
+                sampleSize: "n = 0 (anonieme tekstkopie)",
+                publisher: "Onbekend pastebin-kanaal",
+                excerpt: "██████ [ METADATA ONBEKEND ] ██████\n\n... ██████████████████████████████████████████████ ...\n... onbevestigde notitie over interne beleidslijnen ...",
+                linkType: "Anoniem tekstbestand"
+            },
+            201: {
+                title: "Concept_Subsidie_Roof.txt",
+                sampleSize: "n = 0 (anonieme kopie)",
+                publisher: "@PimKritischNL",
+                excerpt: "CONCEPT NOTITIE - NIET GEVERIFIEERD\n\n... ██████████████████████████████████████████████ ...\n... willekeurige fragmenten over budgetaanpassingen ...\n... ontbrekende ambtelijke goedkeuring en datumstempel ...",
+                linkType: "Anoniem tekstbestand zonder autorisatie"
+            },
+            202: {
+                title: "Rijksoverheid_Beleidsvisie_2027.pdf",
+                sampleSize: "n = 1 (officieel departementsrapport)",
+                publisher: "Ministerie van Binnenlandse Zaken",
+                excerpt: "OFFICIËLE BELEIDSVISIE 2027\n\nDit document beschrijft de volledige herziening van de gemeentelijke subsidiestructuur. Inclusief volledige transparantie, budgetgaranties en inspraaktermijnen voor maatschappelijke organisaties.\n\nGoedgekeurd door Directeur-Generaal Bestuur en Organisatie.",
+                linkType: "Geverifieerd overheidsdocument"
+            },
+            203: {
+                title: "Transparantiedossier_Subsidies_2027.pdf",
+                sampleSize: "n = 14 (volledige dataset en financiële tabellen)",
+                publisher: "Rijksoverheid Transparantieportaal",
+                excerpt: "TRANSPARANTIELOKET SUBSIDIES\n\nAlle onderliggende begrotingen, berekeningen en adviezen van de Raad voor de Financiële Verhoudingen zijn integraal toegevoegd. Geen enkele subsidie wordt gekort; de indexering is volledig gedekt in de kaderbegroting.",
+                linkType: "Officieel open data dossier"
+            }
+        };
+
+        let currentScenario = civilianStoryline;
+        let currentStepIndex = 0;
+        let userResponses = {};
+
+        function startSimulation() {
+            const scenarioVal = document.querySelector('input[name="scenario"]:checked').value;
+            currentScenario = scenarioVal === 'government' ? governmentStoryline : civilianStoryline;
+
+            document.getElementById('header-scenario-title').innerText = scenarioVal === 'government' ? 'Beleid & Politiek Nieuws (Overheid)' : 'Samenleving & Gezondheid (Uitgebreid)';
+
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('sim-container').classList.remove('hidden');
+            document.getElementById('progress-indicator').classList.remove('hidden');
+
+            initChat();
+        }
+
+        function returnToMenu() {
+            document.getElementById('sim-container').classList.add('hidden');
+            document.getElementById('setup-screen').classList.remove('hidden');
+            document.getElementById('progress-indicator').classList.add('hidden');
+            document.getElementById('header-scenario-title').innerText = 'Scenario: Politiek Nieuws & Beleidsontwikkeling (~15 min)';
+        }
+
+        function initChat() {
+            currentStepIndex = 0;
+            userResponses = {};
+            document.getElementById('chat-stream').innerHTML = '';
+            document.getElementById('interactive-prompt-area').classList.add('hidden');
+            processNextStep();
+        }
+
+        function processNextStep() {
+            if (currentStepIndex >= currentScenario.length) {
+                renderCompletionScreen();
+                return;
+            }
+
+            const item = currentScenario[currentStepIndex];
+            document.getElementById('timeline-progress-label').innerText = item.progressLabel;
+            document.getElementById('progress-indicator').innerText = `Stap ${currentStepIndex + 1} / ${currentScenario.length}`;
+
+            if (item.type === "message") {
+                appendChatMessage(item);
+                currentStepIndex++;
+                setTimeout(processNextStep, 2500);
+            } else if (item.type === "prompt") {
+                renderInteractivePrompt(item);
+            }
+        }
+
+        function appendChatMessage(item) {
+            const stream = document.getElementById('chat-stream');
+            const auth = item.author;
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex items-start space-x-3 animate-in fade-in slide-in-from-bottom-2 duration-300';
+            
+            msgDiv.innerHTML = `
+                <div class="${auth.avatarBg} text-white w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-base shadow-md shrink-0">
+                    <i class="fa-solid ${auth.avatarIcon}"></i>
+                </div>
+                <div class="flex-1 bg-white border border-indigo-100 rounded-2xl p-4 shadow-xs space-y-2">
+                    <div class="flex items-center justify-between">
+                        <button onclick="openProfileByName('${auth.name}', '${auth.handle}', '${auth.bio}', '${auth.joined}', '${auth.followers}', '${auth.interests}', '${auth.following}', '${auth.avatarIcon}', '${auth.avatarBg}')" class="font-extrabold text-xs text-slate-900 hover:text-indigo-600 transition flex items-center space-x-1.5 cursor-pointer">
+                            <span>${auth.name}</span>
+                            <span class="text-[11px] text-slate-400 font-normal">(${auth.handle})</span>
+                            <span class="bg-indigo-50 text-indigo-500 text-[10px] px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-user"></i> Dossier</span>
+                        </button>
+                        <span class="text-[11px] text-slate-400 font-medium">${item.time}</span>
+                    </div>
+                    <p class="text-xs md:text-sm text-slate-700 leading-relaxed">${item.text}</p>
+                </div>
+            `;
+            stream.appendChild(msgDiv);
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        function renderInteractivePrompt(q) {
+            const area = document.getElementById('interactive-prompt-area');
+            area.classList.remove('hidden');
+
+            area.innerHTML = `
+                <div class="bg-gradient-to-br from-indigo-600 to-sky-500 text-white rounded-3xl p-6 shadow-xl space-y-4 animate-in zoom-in-95 duration-200">
+                    <div class="flex items-center space-x-2 bg-white/10 w-fit px-3 py-1 rounded-full text-xs font-semibold">
+                        <i class="fa-solid fa-circle-question"></i>
+                        <span>Reflectiemoment (${q.promptId.toUpperCase()})</span>
+                    </div>
+                    <h3 class="font-extrabold text-base md:text-lg">${q.question}</h3>
+                    <p class="text-xs text-indigo-100 leading-relaxed">${q.context}</p>
+
+                    <div class="space-y-4 pt-2 bg-white/10 backdrop-blur-md p-4 rounded-2xl">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-2">
+                                <span class="text-indigo-200">Zeer onwaarschijnlijk</span>
+                                <span id="prompt-slider-val" class="text-white text-sm font-extrabold">50% (Neutraal)</span>
+                                <span class="text-indigo-200">Zeer waarschijnlijk</span>
+                            </div>
+                            <input type="range" id="prompt-slider" min="0" max="100" value="50" class="w-full accent-amber-300 cursor-pointer h-2 bg-white/20 rounded-lg">
+                        </div>
+
+                        <button onclick="submitPromptAnswer('${q.promptId}')" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold py-3 px-4 rounded-xl text-xs transition shadow-lg cursor-pointer">
+                            Bevestig mijn inschatting & Vervolg chat
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            const slider = document.getElementById('prompt-slider');
+            slider.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value);
+                const lbl = document.getElementById('prompt-slider-val');
+                if (val < 30) {
+                    lbl.innerText = `${val}% (Onwaarschijnlijk)`;
+                } else if (val > 70) {
+                    lbl.innerText = `${val}% (Waarschijnlijk)`;
+                } else {
+                    lbl.innerText = `${val}% (Neutraal / Twijfel)`;
+                }
+            });
+        }
+
+        function submitPromptAnswer(promptId) {
+            const val = parseInt(document.getElementById('prompt-slider').value);
+            userResponses[promptId] = val;
+
+            if (promptId === 'gov_q1' && val > 75) {
+                showHintModal("Onderzoekstip: Aan het begin van de stroom circuleert een anoniem gerucht. Controleer altijd de accountleeftijd en de bron voordat je dergelijke alarmerende beleidsplannen serieus neemt.");
+            } else if (promptId === 'gov_q3' && val < 40) {
+                showHintModal("Inlichtingencheck: Inmiddels zijn alle officiële cijfers, datasets en het transparantiedossier gepubliceerd door het ministerie en geverifieerd door journalisten. Waarom zou je hier nu nog aan twijfelen?");
+            } else {
+                document.getElementById('interactive-prompt-area').classList.add('hidden');
+                currentStepIndex++;
+                setTimeout(processNextStep, 800);
+            }
+        }
+
+        function openProfileByName(name, handle, bio, joined, followers, interests, following, icon, bg) {
+            const content = document.getElementById('profile-modal-content');
+            content.innerHTML = `
+                <div class="flex items-center space-x-3.5 mb-4">
+                    <div class="${bg} text-white w-14 h-14 rounded-2xl flex items-center justify-center font-extrabold text-xl shadow-md">
+                        <i class="fa-solid ${icon}"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-lg text-slate-900">${name}</h3>
+                        <p class="text-xs text-indigo-600 font-semibold">${handle}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-xs text-slate-600">
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block mb-1 text-[10px] uppercase tracking-wider font-bold">Dossier / Bio</span>
+                        <p class="text-slate-700 leading-relaxed">${bio}</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                            <span class="text-slate-400 text-[10px] uppercase tracking-wider block font-bold">Account Leeftijd</span>
+                            <span class="font-extrabold text-amber-600 text-sm">${joined}</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                            <span class="text-slate-400 text-[10px] uppercase tracking-wider block font-bold">Volgers</span>
+                            <span class="font-extrabold text-slate-800 text-sm">${followers}</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 space-y-2">
+                        <div>
+                            <span class="text-slate-400 block text-[10px] uppercase tracking-wider font-bold">Interesses</span>
+                            <span class="font-medium text-slate-700">${interests}</span>
+                        </div>
+                        <div class="pt-1 border-t border-slate-200/60">
+                            <span class="text-slate-400 block text-[10px] uppercase tracking-wider font-bold">Volgt ook</span>
+                            <span class="font-medium text-indigo-600">${following}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="closeProfileModal()" class="mt-5 w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold py-3 rounded-2xl text-xs transition shadow-md cursor-pointer">
+                    Sluiten
+                </button>
+            `;
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profile-modal').classList.add('hidden');
+        }
+
+        function openSourceModal(id) {
+            const src = sourcesData[id];
+            if (!src) return;
+
+            const content = document.getElementById('source-modal-content');
+            content.innerHTML = `
+                <div class="flex items-center space-x-3.5 mb-5">
+                    <div class="bg-indigo-100 text-indigo-600 p-3.5 rounded-2xl">
+                        <i class="fa-solid fa-file-lines text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] uppercase tracking-wider text-indigo-600 font-bold">Broninspectie</span>
+                        <h3 class="font-extrabold text-base text-slate-900">${src.title}</h3>
+                    </div>
+                </div>
+
+                <div class="space-y-3.5 text-xs text-slate-600">
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400 font-medium">Type:</span>
+                            <span class="font-bold text-slate-800">${src.linkType}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400 font-medium">Omvang / Data:</span>
+                            <span class="font-bold text-indigo-600">${src.sampleSize}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400 font-medium">Herkomst:</span>
+                            <span class="font-bold text-slate-800">${src.publisher}</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block mb-1 text-[10px] uppercase tracking-wider font-bold">Inhoud / Document Tekst</span>
+                        <p class="text-slate-500 font-mono tracking-widest text-[11px] leading-relaxed bg-white p-3 rounded-xl border border-slate-200">${src.excerpt}</p>
+                    </div>
+                </div>
+
+                <button onclick="closeSourceModal()" class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold py-3 rounded-2xl text-xs transition shadow-md cursor-pointer">
+                    Terug naar Operatie
+                </button>
+            `;
+            document.getElementById('source-modal').classList.remove('hidden');
+        }
+
+        function closeSourceModal() {
+            document.getElementById('source-modal').classList.add('hidden');
+        }
+
+        function renderCompletionScreen() {
+            document.getElementById('timeline-progress-label').innerText = "Training Voltooid";
+            const stream = document.getElementById('chat-stream');
+            
+            let promptsHtml = '';
+            currentScenario.filter(item => item.type === "prompt").forEach(q => {
+                const userScore = userResponses[q.promptId] !== undefined ? userResponses[q.promptId] : 'Niet ingevuld';
+                promptsHtml += `
+                    <div class="bg-white border border-indigo-100 rounded-2xl p-4 space-y-2 text-left text-xs shadow-xs">
+                        <div class="flex justify-between items-center font-extrabold text-slate-900">
+                            <span>${q.progressLabel}</span>
+                            <span class="bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-lg">Jouw inschatting: ${userScore}%</span>
+                        </div>
+                        <p class="text-slate-700 italic">"${q.question}"</p>
+                        <div class="pt-2 border-t border-slate-100 space-y-1">
+                            <p class="text-indigo-600 font-bold">Verwachte schatting (ongeveer): ${q.optimalRange}</p>
+                            <p class="text-slate-600"><strong>Waarom?:</strong> ${q.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            stream.innerHTML = `
+                <div class="py-6 space-y-6 animate-in fade-in duration-500 text-center">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto text-2xl shadow-md">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-xl text-slate-900">Trainingsresultaat & Evaluatie</h2>
+                        <p class="text-xs text-slate-600 max-w-md mx-auto leading-relaxed mt-1">
+                            Je hebt de overheidmodule over politiek nieuws doorlopen. Je hebt ervaren hoe je van een gezonde, kritische scepsis aan het begin kunt evolueren naar een gefundeerd vertrouwen wanneer officiële transparante data en verificatie plaatsvinden.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 max-w-2xl mx-auto">
+                        ${promptsHtml}
+                    </div>
+
+                    <div class="pt-2">
+                        <button onclick="returnToMenu()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-3 px-6 rounded-2xl text-xs transition shadow-md cursor-pointer">
+                            Terug naar Scenariomenu
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showHintModal(msg) {
+            document.getElementById('hint-modal-text').innerText = msg;
+            document.getElementById('hint-modal').classList.remove('hidden');
+        }
+
+        function closeHintModal() {
+            document.getElementById('hint-modal').classList.add('hidden');
+            document.getElementById('interactive-prompt-area').classList.add('hidden');
+            currentStepIndex++;
+            setTimeout(processNextTestOrStep, 800);
+        }
+
+        function processNextTestOrStep() {
+            processNextStep();
+        }
+    </script>
+</body>
+</html>
