@@ -1,7 +1,9 @@
 # VeriFind  (1st Place - The Hague Policy Hackathon 2026)
 
 Live Demo: [verifind-tan.vercel.app](https://verifind-tan.vercel.app/)
+
 Policy Brief: [📄 Read the Full Document Here](https://github.com/louistliu/VeriFind/blob/main/Policy%20Briefing.pdf)
+
 Team: Alex Li, Louis Liu, Roni Rachid, Seb Fontein, Yassine El Hatachi
 
 ## The Challenge
